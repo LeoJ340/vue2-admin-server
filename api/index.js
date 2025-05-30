@@ -2,6 +2,7 @@ const express = require('express');
 const path = require('path');
 
 const app = express();
+const cors = require('cors');
 
 // 静态资源服务中间件
 app.use(express.static(path.join(__dirname, 'public')));
@@ -31,6 +32,13 @@ function authMiddleware(req, res, next) {
     })
 }
 app.use(authMiddleware)
+
+// 或者精确配置允许的域名（推荐）
+app.use(cors({
+    origin: ['https://vue2-element-admin-gamma.vercel.app'],
+    methods: ['GET', 'POST', 'PUT', 'DELETE'],
+    allowedHeaders: ['Content-Type', 'Authorization']
+}));
 
 // 路由
 const router = require('./routes')
