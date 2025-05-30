@@ -1,5 +1,5 @@
-const usersRouter = require('./api/user');
-const tableRouter = require('./api/table')
+const usersRouter = require('./user');
+const tableRouter = require('./table')
 
 module.exports = app => {
     app.use('/api/user', usersRouter);
