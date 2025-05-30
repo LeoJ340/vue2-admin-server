@@ -9,6 +9,12 @@ app.use(express.static(path.join(__dirname, 'public')));
 // 解析json请求体中间件
 app.use(express.json());
 
+// cors
+app.use(cors({
+    origin: ['https://vue2-element-admin-gamma.vercel.app'],
+    methods: ['GET', 'POST', 'PUT', 'DELETE'],
+}));
+
 // 拦截器中间件
 const interceptorMiddleware = (req, res, next) => {
     const { method, url } = req
@@ -32,13 +38,6 @@ function authMiddleware(req, res, next) {
     })
 }
 app.use(authMiddleware)
-
-// 或者精确配置允许的域名（推荐）
-app.use(cors({
-    origin: ['https://vue2-element-admin-gamma.vercel.app'],
-    methods: ['GET', 'POST', 'PUT', 'DELETE'],
-    allowedHeaders: ['Content-Type', 'Authorization']
-}));
 
 // 路由
 const router = require('./routes')
